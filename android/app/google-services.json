@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "968781617160",
+    "project_id": "pet-guardian-80461",
+    "storage_bucket": "pet-guardian-80461.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968781617160:android:4c94ef2d65ddc1e94fd9bd",
+        "android_client_info": {
+          "package_name": "com.aspc.guardian_pet_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "968781617160-jceeiapvpti7kuiqf4d6ma3iljl1lnic.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDn2D9qroamshzm8HYFUVwAzlZPNNl-c4w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "968781617160-jceeiapvpti7kuiqf4d6ma3iljl1lnic.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "968781617160-8p848dkra8bhjpaf5v1u4tsnkh78uvlr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.aspc.guardianPetApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
