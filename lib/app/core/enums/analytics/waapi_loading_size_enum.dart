@@ -1,4 +1,0 @@
-enum WaapiLoadingSizeEnum {
-  big,
-  small,
-}
