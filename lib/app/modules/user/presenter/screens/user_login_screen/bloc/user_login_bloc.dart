@@ -4,26 +4,25 @@ import 'package:equatable/equatable.dart';
 import '../../../../domain/entities/user_entity.dart';
 import '../../../../domain/usecase/user_login_usecase.dart';
 
-part 'authentication_event.dart';
-part 'authentication_state.dart';
+part 'user_login_event.dart';
+part 'user_login_state.dart';
 
-class AuthenticationBloc
-    extends Bloc<AuthenticationEvent, AuthenticationState> {
+class UserLoginBloc extends Bloc<UserLoginEvent, UserLoginState> {
   final UserLoginUsecase _userLoginUsecase;
 
-  AuthenticationBloc({
-    required UserLoginUsecase authenticationGoogleUsecase,
-  })  : _userLoginUsecase = authenticationGoogleUsecase,
-        super(AuthenticationInitial()) {
+  UserLoginBloc({
+    required UserLoginUsecase userLoginUsecase,
+  })  : _userLoginUsecase = userLoginUsecase,
+        super(UserLoginInitial()) {
     on<AuthenticationLoginEvent>(_authenticationLoginEvent);
   }
 
   Future<void> _authenticationLoginEvent(
     AuthenticationLoginEvent event,
-    Emitter<AuthenticationState> emit,
+    Emitter<UserLoginState> emit,
   ) async {
     emit(
-      AuthenticationLoading(),
+      UserLoginLoading(),
     );
 
     final result = await _userLoginUsecase.call(
@@ -34,14 +33,14 @@ class AuthenticationBloc
     result.fold(
       (left) {
         emit(
-          AuthenticationFailure(
+          UserLoginFailure(
             message: left.message ?? '',
           ),
         );
       },
       (right) {
         emit(
-          AuthenticationSuccess(
+          UserLoginSuccess(
             user: right,
           ),
         );

@@ -10,27 +10,29 @@ import '../../../../../core/extension/translate_extension.dart';
 import '../../../../../core/widgets/pet_app_button.dart';
 import '../../../../../core/widgets/pet_app_scaffold.dart';
 import '../../../../../core/widgets/pet_app_text_field.dart';
+import '../../../../../core/widgets/snackbar_widget.dart';
 import '../../../../../routes/authentication_routes.dart';
 import '../../../../../routes/home_routes.dart';
-import 'bloc/authentication_bloc.dart';
+import 'bloc/user_login_bloc.dart';
 
-class AuthenticationScreen extends StatefulWidget {
-  const AuthenticationScreen({
+class UserLoginScreen extends StatefulWidget {
+  const UserLoginScreen({
     super.key,
   });
 
   @override
-  State<AuthenticationScreen> createState() => _AuthenticationScreenState();
+  State<UserLoginScreen> createState() => _UserLoginScreenState();
 }
 
-class _AuthenticationScreenState extends State<AuthenticationScreen> {
-  late final AuthenticationBloc _authenticationBloc;
+class _UserLoginScreenState extends State<UserLoginScreen> {
+  late final UserLoginBloc _authenticationBloc;
   final TextEditingController _userNameEmailController =
       TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
   @override
   void initState() {
-    _authenticationBloc = Modular.get<AuthenticationBloc>();
+    _authenticationBloc = Modular.get<UserLoginBloc>();
     super.initState();
   }
 
@@ -40,18 +42,16 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
   Widget build(BuildContext context) {
     return PetAppScaffold(
       body: SingleChildScrollView(
-        child: BlocConsumer<AuthenticationBloc, AuthenticationState>(
+        child: BlocConsumer<UserLoginBloc, UserLoginState>(
           bloc: _authenticationBloc,
           listener: (context, state) {
-            if (state is AuthenticationFailure) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Error: ${state.message}'),
-                ),
+            if (state is UserLoginFailure) {
+              SnackbarWidget.showSnackbar(
+                context,
+                state.message,
               );
             }
-
-            if (state is AuthenticationSuccess) {
+            if (state is UserLoginSuccess) {
               Modular.to.pushNamed(
                 HomeRoutes.homeScreenInitialRoute,
               );
@@ -84,19 +84,22 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                   PetAppTextField(
                     textEditingController: _userNameEmailController,
                     hintText: context.translate.enterYouremailUsername,
-                    prefixIcon: const Icon(
-                      size: 22,
-                      FontAwesomeIcons.envelope,
-                      color: Color.fromARGB(255, 65, 65, 65),
+                    prefixIcon: Icon(
+                      size: 20,
+                      userIcon(),
+                      color: const Color.fromARGB(255, 65, 65, 65),
                     ),
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.02,
                   ),
                   PetAppTextField(
+                    onChanged: (value) {
+                      setState(() {});
+                    },
                     obscureText: isObscure,
                     textEditingController: _passwordController,
-                    hintText: 'Enter your password',
+                    hintText: context.translate.password,
                     prefixIcon: IconButton(
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
@@ -114,21 +117,21 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                       color: const Color.fromARGB(255, 65, 65, 65),
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
                       vertical: 35,
                     ),
                     child: Text(
-                      'Forgot Password?',
-                      style: TextStyle(
+                      context.translate.forgotPassword,
+                      style: const TextStyle(
                         color: Color.fromARGB(255, 7, 95, 125),
                         fontSize: 16,
                       ),
                     ),
                   ),
                   PetAppButton(
-                    text: 'Login',
-                    loading: state is AuthenticationLoading,
+                    text: context.translate.login,
+                    loading: state is UserLoginLoading,
                     onPressed: () async {
                       if (_userNameEmailController.text.isNotEmpty &&
                           _passwordController.text.isNotEmpty) {
@@ -138,13 +141,11 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                             password: _passwordController.text,
                           ),
                         );
-
-                        if (_authenticationBloc.state
-                            is AuthenticationSuccess) {
-                          Modular.to.pushNamed(
-                            HomeRoutes.homeScreenInitialRoute,
-                          );
-                        }
+                      } else {
+                        SnackbarWidget.showSnackbar(
+                          context,
+                          'Login ou senha vazios',
+                        );
                       }
                     },
                   ),
@@ -155,9 +156,9 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                     child: RichText(
                       text: TextSpan(
                         children: [
-                          const TextSpan(
-                            text: 'Don\'t have an account? ',
-                            style: TextStyle(
+                          TextSpan(
+                            text: context.translate.dontHaveAccount,
+                            style: const TextStyle(
                               color: Colors.black,
                               fontSize: 18,
                             ),
@@ -169,7 +170,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                                   AuthenticationRoutes.singUpScreenInitialRoute,
                                 );
                               },
-                            text: 'Sign up',
+                            text: ' ${context.translate.signUp}',
                             style: const TextStyle(
                               color: Color.fromARGB(255, 7, 95, 125),
                               fontSize: 18,
@@ -186,5 +187,12 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
         ),
       ),
     );
+  }
+
+  IconData userIcon() {
+    if (_userNameEmailController.text.contains('@')) {
+      return FontAwesomeIcons.envelope;
+    }
+    return FontAwesomeIcons.user;
   }
 }

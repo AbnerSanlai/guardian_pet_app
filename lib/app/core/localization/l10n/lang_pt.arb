@@ -4,9 +4,49 @@
     "@appTitle": {
         "description": "Título da aplicação"
     },
-    "enterYouremailUsername": "Entre com seu email ou usuário",
+    "enterYouremailUsername": "E-mail ou usuário",
     "@enterYouremailUsername": {
         "description": "label do campo de email ou usuário"
+    },
+    "forgotPassword": "Esqueceu sua senha?",
+    "@forgotPassword": {
+        "description": "label Esqueceu sua senha?"
+    },
+    "dontHaveAccount": "Não tem uma conta?",
+    "@dontHaveAccount": {
+        "description": "label Não tem uma contao"
+    },
+    "password": "Senha",
+    "@password": {
+        "description": "label Senha"
+    },
+    "signUp": "Cadastrar",
+    "@signUp": {
+        "description": "label Cadastrar"
+    },
+    "login": "Entrar",
+    "@login": {
+        "description": "label Logar"
+    },
+    "user": "Usuário",
+    "@user": {
+        "description": "label Usuário"
+    },
+    "firstName": "Nome",
+    "@firstName": {
+        "description": "label Primeiro Nome"
+    },
+    "email": "E-mail",
+    "@email": {
+        "description": "label E-mail"
+    },
+    "confirmPassword": "Confirmar Senha",
+    "@confirmPassword": {
+        "description": "Confirmar Senha"
+    },
+    "cancel": "Cancelar",
+    "@cancel": {
+        "description": "Label Cancelar"
     }
 
 }

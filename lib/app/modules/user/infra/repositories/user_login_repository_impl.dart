@@ -31,21 +31,21 @@ class UserLoginRepositoryImpl implements UserLoginRepository {
         userModel: userModel,
       );
 
-      // if (userModel.invalidCredentials!) {
-      //   return left(
-      //     const UserLoginFailure(
-      //       message: 'Login ou senha incorretos',
-      //     ),
-      //   );
-      // }
+      if (userModel.invalidCredentials!) {
+        return left(
+          const UserLoginFailure(
+            message: 'Login ou senha incorretos',
+          ),
+        );
+      }
 
-      // if (userEntity.id == null) {
-      //   return left(
-      //     const UserLoginFailure(
-      //       message: 'Usuário não encontrado',
-      //     ),
-      //   );
-      // }
+      if (userEntity.id == null) {
+        return left(
+          const UserLoginFailure(
+            message: 'Usuário não encontrado',
+          ),
+        );
+      }
       return right(
         userEntity,
       );

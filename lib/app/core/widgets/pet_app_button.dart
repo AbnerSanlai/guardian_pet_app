@@ -4,12 +4,14 @@ class PetAppButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final String text;
   final bool? loading;
+  final bool? enabled;
 
   const PetAppButton({
     Key? key,
     this.onPressed,
     required this.text,
     this.loading = false,
+    this.enabled = true,
   }) : super(key: key);
 
   @override
@@ -21,7 +23,9 @@ class PetAppButton extends StatelessWidget {
           const Size(400, 55),
         ),
         backgroundColor: MaterialStateProperty.all(
-          const Color.fromARGB(140, 32, 168, 214),
+          enabled!
+              ? const Color.fromARGB(140, 32, 168, 214)
+              : const Color.fromARGB(139, 64, 94, 104),
         ),
         shape: MaterialStateProperty.all(
           const RoundedRectangleBorder(

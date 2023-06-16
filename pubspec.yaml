@@ -31,7 +31,8 @@ dependencies:
   firebase_auth: ^4.6.1
   firebase_crashlytics: ^3.0.15
   shared_preferences: ^2.0.8
-  google_fonts: ^4.0.5
+  google_fonts: ^5.0.0
+  
 
 
 dev_dependencies:

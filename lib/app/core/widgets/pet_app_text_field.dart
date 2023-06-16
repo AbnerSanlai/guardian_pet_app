@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PetAppTextField extends StatelessWidget {
   final TextEditingController textEditingController;
@@ -10,6 +11,7 @@ class PetAppTextField extends StatelessWidget {
   final bool obscureText;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
+  final Function(String)? onChanged;
 
   const PetAppTextField({
     Key? key,
@@ -19,18 +21,23 @@ class PetAppTextField extends StatelessWidget {
     this.suffixIcon,
     this.suffixIconColor,
     this.hintText,
-    this.obscureText = true,
+    this.obscureText = false,
     this.keyboardType,
     this.textInputAction,
+    this.onChanged,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChanged,
+      obscureText: obscureText,
       controller: textEditingController,
-      style: const TextStyle(
-        fontSize: 16,
-        color: Color.fromARGB(255, 65, 65, 65),
+      style: GoogleFonts.montserrat(
+        textStyle: const TextStyle(
+          fontSize: 18,
+          color: Color.fromARGB(255, 65, 65, 65),
+        ),
       ),
       decoration: InputDecoration(
         suffixIcon: suffixIcon,
@@ -42,8 +49,11 @@ class PetAppTextField extends StatelessWidget {
           vertical: 20,
         ),
         hintText: hintText,
-        hintStyle: const TextStyle(
-          color: Color.fromARGB(255, 65, 65, 65),
+        hintStyle: GoogleFonts.montserrat(
+          textStyle: const TextStyle(
+            fontSize: 18,
+            color: Color.fromARGB(255, 65, 65, 65),
+          ),
         ),
         border: OutlineInputBorder(
           borderSide: BorderSide.none,

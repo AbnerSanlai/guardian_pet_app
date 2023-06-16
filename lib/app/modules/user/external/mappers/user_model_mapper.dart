@@ -12,7 +12,7 @@ class UserModelMapper {
       email: map['email'],
       celPhone: map['celphone'],
       phone: map['celphone2'],
-      invalidCredentials: map['invalid_credentials'],
+      invalidCredentials: map['invalid_credentials'] ?? false,
     );
   }
 

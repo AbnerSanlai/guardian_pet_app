@@ -27,20 +27,26 @@ class UserLoginDatasourceImpl extends UserLoginDatasource {
       },
     );
 
-    final userModel = _userModelMapper.fromMap(
-      map: result.data,
-    );
-
-    if (result == null ||
-        result.data['access_token'] != null ||
-        result.data['access_token'] != '') {
-      final sharedPreferencesStorageService = SharedPreferencesStorageService();
-      sharedPreferencesStorageService.setString(
-        'token',
-        result.date['access_token'],
+    if (result.statusCode == 200) {
+      final userModel = _userModelMapper.fromMap(
+        map: result.data,
       );
+
+      String token = result.data['access_token'] ?? '';
+      if (token.isNotEmpty) {
+        final sharedPreferencesStorageService =
+            SharedPreferencesStorageService();
+        sharedPreferencesStorageService.setString(
+          'token',
+          result.date['access_token'],
+        );
+      }
+
+      return userModel;
     }
 
-    return userModel;
+    return const UserModel(
+      invalidCredentials: true,
+    );
   }
 }

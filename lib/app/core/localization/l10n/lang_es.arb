@@ -1,6 +1,15 @@
 {
     "@@locale": "es",
     "appTitle": "Pet Guardian",
-    "enterYouremailUsername": "Enter your email or Username"
-
+    "enterYouremailUsername": "correo electrónico o usuario",
+    "forgotPassword": "¿Olvidó su contraseña?",
+    "dontHaveAccount": "¿No tienes una cuenta?",
+    "password": "contraseña",
+    "signUp": "Únete",
+    "login": "Iniciar sesión",
+    "user": "Usuario",
+    "firstName": "Nombre",
+    "email": "Correo electrónico",
+    "confirmPassword": "Confirmar contraseña",
+    "cancel": "Cancelar"
 }
